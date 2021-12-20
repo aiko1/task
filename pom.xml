@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="http://maven.apache.org/POM/4.0.0"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <artifactId>task</artifactId>
+
+    <build>
+        <plugins>
+
+            <plugin>
+                <artifactId>allure-maven</artifactId>
+                <configuration>
+                    <allureDownloadUrl>
+                        https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/2.9.0/allure-commandline-2.9.0.zip
+                    </allureDownloadUrl>
+                </configuration>
+                <groupId>io.qameta.allure</groupId>
+                <version>2.9</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <argLine>
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
+                    </argLine>
+                    <systemProperties>
+                        <property>
+                            <name>junit.jupiter.extensions.autodetection.enabled</name>
+                            <value>true</value>
+                        </property>
+                    </systemProperties>
+                    <testFailureIgnore>false</testFailureIgnore>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <artifactId>junit-platform-surefire-provider</artifactId>
+                        <groupId>org.junit.platform</groupId>
+                        <version>${junit-platform-surefire-provider.version}</version>
+                    </dependency>
+                    <dependency>
+                        <artifactId>aspectjweaver</artifactId>
+                        <groupId>org.aspectj</groupId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+                <version>${maven-surefire-plugin.version}</version>
+            </plugin>
+        </plugins>
+    </build>
+
+    <dependencies>
+
+        <dependency>
+            <artifactId>junit-jupiter-api</artifactId>
+            <groupId>org.junit.jupiter</groupId>
+            <scope>test</scope>
+            <version>5.8.2</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>allure-junit5</artifactId>
+            <groupId>io.qameta.allure</groupId>
+            <version>${allure-junit5.version}</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>allure-junit-adaptor</artifactId>
+            <groupId>ru.yandex.qatools.allure</groupId>
+            <scope>test</scope>
+            <version>1.5.4</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>rest-assured</artifactId>
+            <groupId>io.rest-assured</groupId>
+            <scope>test</scope>
+            <version>4.4.0</version>
+        </dependency>
+
+        <dependency>
+            <artifactId>hamcrest-all</artifactId>
+            <groupId>org.hamcrest</groupId>
+            <version>1.3</version>
+        </dependency>
+
+    </dependencies>
+
+    <groupId>org.demo</groupId>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <allure-junit5.version>2.6.0</allure-junit5.version>
+        <aspectj.version>1.9.7</aspectj.version>
+        <junit-platform-surefire-provider.version>1.1.0</junit-platform-surefire-provider.version>
+        <maven-surefire-plugin.version>2.21.0</maven-surefire-plugin.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <version>1.0-SNAPSHOT</version>
+
+</project>
